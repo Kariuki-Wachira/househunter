@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <title>Add Property</title>
+</head>
+
+<body class="m-5">
+    <div class="container ">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <a href="{% url 'homepage' %}" class="btn btn-outline-dark my-3">View all properties</a>
+                <div class="card">
+                    <form method="POST" action="" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group m-3">
+                            <label>Upload image</label>
+                            <input required name="image" type="file" class="form-control-file">
+                        </div>
+
+                        <div class="form-group m-3">
+                            <label>Select a location</label>
+                            <select name="location" class="form-control">
+                                <option value='none'>Select a location...</option>
+                                {% for location in locations %}
+                                <option value='{{location.id}}'>{{location.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group m-3">
+                            <label>Add a new location</label>
+                            <input name="location_new" type="text" placeholder="Enter a new location" class="form-control">
+                        </div>
+
+                        <div class="form-group m-3">
+                            <label>Price</label>
+                            <input required name="price" type="number" placeholder="Enter price for property" class="form-control">
+                        </div>
+
+                        <div class="form-group m-3">
+                            <label>Contact information</label>
+                            <input required name="contacts" type="tel" placeholder="Enter your phone number" class="form-control">
+                        </div>
+
+                        <div class="form-group m-3">
+                            <label>Availability status</label>
+                            <select name="availabilitystatus" class="form-control">
+                                <option value='available'>Available</option> 
+                                <option value="unavailable">Not Available</option>
+                                <!--add if statement for unavailing property when the not available option is selected during update by the lessor-->
+                            </select>
+                        </div>
+
+                        <div class="form-group m-3">
+                            <label>Description</label>
+                            <textarea required name="description" type="text" placeholder="Enter property description here" class="form-control" rows="6"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary m-3">Add Property</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

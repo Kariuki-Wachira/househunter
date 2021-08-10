@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Property Details</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+</head>
+
+<!--This Contains the main page where the image and the description for the property is displayed-->
+
+<body class="m-5">
+    <div class="cotainer">
+        <div class="row">
+            <!--This is the button to go back to the main home page for all properties-->
+            <a href="{% url 'homepage' %}" class="btn btn-outline-dark my-3">Click here to go back to all properties</a>
+
+            <div class="col-md-6">
+
+                <div style="height: 90vh;">
+                    <img style="max-width: 90%; max-height: 90%;" src="{{property.image.url}}" alt=" " width="800" height="800">
+                </div>
+
+            </div>
+            <div class="card" style="width: 40rem;">
+                <div class="card-body">
+                    <h5 class="card-title">This Property is Located at {{property.location}}</h5>
+                    <br>
+                    <h3 class="card-subtitle mb-2 text-muted">Ksh {{property.price}} per month</h3>
+                    <p class="fs-2" style="color: green;">Contacts: {{property.contacts}}</p>
+                    <p class="card-text">{{property.description}}</p>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="#" class="btn btn-primary" type="button">Add to wish-list</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
