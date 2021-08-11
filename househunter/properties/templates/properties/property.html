@@ -32,8 +32,16 @@
                     <h3 class="card-subtitle mb-2 text-muted">Ksh {{property.price}} per month</h3>
                     <p class="fs-2" style="color: green;">Contacts: {{property.contacts}}</p>
                     <p class="card-text">{{property.description}}</p>
+
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         <a href="#" class="btn btn-primary" type="button">Add to wish-list</a>
+                        <a class="btn btn-dark" type="button" onclick="printFunction()">Save Information as PDF</a>​
+
+                        <script>
+                            function printFunction() {
+                                window.print();
+                            }
+                        </script>
                     </div>
 
                 </div>

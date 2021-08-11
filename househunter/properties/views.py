@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Location, Property
 # Create your views here.
 
@@ -41,6 +41,8 @@ def addProperty(request):
             price=data['price'],
             contacts=data['contacts'],
         )
+
+        return redirect('homepage')
 
     context = {'locations': locations}
     return render(request, 'properties/add.html', context)
