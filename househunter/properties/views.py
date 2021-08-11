@@ -4,6 +4,7 @@ from .models import Location, Property
 
 def homepage(request):
     location = request.GET.get('location')
+    username=request.user.get_username()
 
     if location == None:
         properties = Property.objects.all()
@@ -12,7 +13,7 @@ def homepage(request):
 
     locations = Location.objects.all()
 
-    context = {'locations': locations, 'properties': properties}
+    context = {'locations': locations, 'properties': properties, 'username': username}
     return render(request, 'properties/homepage.html', context)
 
 def viewProperty(request, pk):
