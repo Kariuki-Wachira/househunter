@@ -1,6 +1,26 @@
 from django.shortcuts import render, redirect
 from .models import Location, Property
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 # Create your views here.
+
+def loginUser(request):
+
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = authenticate (request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('homepage')
+
+    return render(request,'properties/login_register.html')
+
+def logoutUser(request):
+    logout(request)
+    return redirect('homepage')
 
 def homepage(request):
     location = request.GET.get('location')
@@ -20,6 +40,7 @@ def viewProperty(request, pk):
     property = Property.objects.get(id=pk)
     return render(request, 'properties/property.html', {'property': property})
 
+@login_required(login_url='login')
 def addProperty(request):
     locations = Location.objects.all()
 

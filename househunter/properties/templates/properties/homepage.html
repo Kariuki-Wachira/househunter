@@ -25,8 +25,24 @@
 </head>
 
 <body class="m-5">
+
     <!--This is the main Container for the body-->
     <div class="container">
+        <ul class="nav mb-3 justify-content-end" role="tablist">
+            {% if request.user.is_authenticated %}
+            <li class="nav-item">
+                <p style="font-size:130%">You are logged in as: {{request.user}}</p>
+            </li>
+            <li>
+                <a href="{% url 'logout' %}" class="btn btn-dark btn-block btn-sm m-1">LogOut</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a href="{% url 'login' %}" class="btn btn-outline-dark ml-6">Sign in</a>
+            </li>
+            {% endif %}
+        </ul>
+
 
         <!--The Container is divided into two parts where one is the navigation and the other is for the property listings -->
         <div class="row">

@@ -13,19 +13,19 @@
 <!--This Contains the main page where the image and the description for the property is displayed-->
 
 <body class="m-5">
-    <div class="cotainer">
-        <div class="row">
+    <div class="container">
+        <div class="row justify-content-center">
             <!--This is the button to go back to the main home page for all properties-->
             <a href="{% url 'homepage' %}" class="btn btn-outline-dark my-3">Click here to go back to all properties</a>
 
             <div class="col-md-6">
 
-                <div style="height: 90vh;">
+                <div style="height: 70vh;">
                     <img style="max-width: 90%; max-height: 90%;" src="{{property.image.url}}" alt=" " width="800" height="800">
                 </div>
 
             </div>
-            <div class="card" style="width: 40rem;">
+            <div class="card" style="width: 30rem;">
                 <div class="card-body">
                     <h5 class="card-title">This Property is Located at {{property.location}}</h5>
                     <br>
