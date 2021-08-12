@@ -2,10 +2,11 @@ from django.shortcuts import render, redirect
 from .models import Location, Property
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from .forms import  CustomUserCreationForm
 # Create your views here.
 
 def loginUser(request):
-
+    page = 'login'
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -16,11 +17,17 @@ def loginUser(request):
             login(request, user)
             return redirect('homepage')
 
-    return render(request,'properties/login_register.html')
+    return render(request,'properties/login_register.html', {'page': page,})
 
 def logoutUser(request):
     logout(request)
     return redirect('homepage')
+
+def registerUser(request):
+    page = 'register'
+    form = CustomUserCreationForm()
+    context = {'form': form, 'page': page}
+    return render(request, 'properties/login_register.html', context)
 
 def homepage(request):
     location = request.GET.get('location')
