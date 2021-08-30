@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Lessor page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link href="css/style.css" rel="stylesheet"> -->
+
+    <!-- This is the CSS link from bootstrap. I used bootstrap because I am very poor with designs and applying external CSS was slowing my progress -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+    <style>
+        .image-thumbnail {
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .list-group-item a {
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+
+</head>
+
+<body class="m-5">
+
+    <!--This is the main Container for the body-->
+    <div class="container">
+        <ul class="nav mb-3 justify-content-end" role="tablist">
+            {% if request.user.is_authenticated %}
+            <li class="nav-item">
+                <p style="font-size: 21px">You are logged in as: {{request.user}}</p>
+            </li>
+            <li>
+                <a href="{% url 'logout' %}" class="btn btn-dark btn-block btn-sm m-1">LogOut</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a href="{% url 'login' %}" class="btn btn-outline-dark ml-6">Sign in</a>
+            </li>
+            {% endif %}
+        </ul>
+
+
+        <!--This is a container with features to allow lessors to add and edit properties -->
+        <div class="row">
+            <div class="col-md-3">
+                <!--This is the Left Navigation Bar where you can select and filter properties by Location-->
+                <div class="card">
+                    <!-- <div class="card-header">
+                        <h5>Filter by Location</h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <a href="{% url 'homepage' %}">All</a>
+                        </li>
+
+                        {% for location in locations %}
+                        <li class="list-group-item">
+                            <a href="{% url 'homepage' %}?location={{location.name}}">
+                                {{location.name}}
+                            </a>
+                        </li>
+
+                        {% endfor %} 
+                    </ul>-->
+                    <a href="#" class="btn btn-dark btn-block btn-sm m-1">View my Properties</a>
+                    <br>
+                    <a href="#" class="btn btn-dark btn-block btn-sm m-1">View All Properties</a>
+                    <br>
+                    <a href="{% url 'add' %}" class="btn btn-dark btn-block btn-sm m-1">Add Property</a>
+                    <br>
+                    <a href="#" class="btn btn-dark btn-block btn-sm m-1">Edit Property</a>
+                    <br>
+
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <div class="row">
+
+                    {% for property in properties %}
+                    <!--Here we have the right panel where properties posted are listed in card mode-->
+                    <div class="col-md-4">
+                        <div class="card my-2">
+                            <img src="{{property.image.url}}" class="image-thumbnail" alt="Card image cap">
+
+                            <div class="card-body">
+                                <small>Location : {{property.location.name}}</small>
+                            </div>
+                            <a href="{% url 'property' property.id %}" class="btn btn-outline-dark btn-sm m-1">View Property</a>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <h3>NO PROPERTIES DISPLAYED AT THE MOMENT...</h3>
+                    {% endfor %}
+
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</body>
+
+</html>

@@ -9,7 +9,6 @@ class Location(models.Model):
     def __str__(self):
         return self.name
 
-
 class Property(models.Model):
     location = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True, blank=True)
     image = models.ImageField(null=False, blank=False)

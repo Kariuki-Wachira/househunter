@@ -23,11 +23,11 @@ def logoutUser(request):
     logout(request)
     return redirect('homepage')
 
-def registerUser(request):
-    page = 'register'
-    form = CustomUserCreationForm()
-    context = {'form': form, 'page': page}
-    return render(request, 'properties/login_register.html', context)
+# def registerUser(request):
+#     page = 'register'
+#     form = CustomUserCreationForm()
+#     context = {'form': form, 'page': page}
+#     return render(request, 'properties/login_register.html', context)
 
 def homepage(request):
     location = request.GET.get('location')
@@ -42,6 +42,14 @@ def homepage(request):
 
     context = {'locations': locations, 'properties': properties, 'username': username}
     return render(request, 'properties/homepage.html', context)
+
+def lessorpage(request):
+    username=request.user.get_username()
+
+    properties = Property.objects.all()
+
+    context = {'properties': properties, 'username': username}
+    return render(request, 'properties/lessorpage.html', context)
 
 def viewProperty(request, pk):
     property = Property.objects.get(id=pk)
