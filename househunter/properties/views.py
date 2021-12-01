@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from .models import Location, Property
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .forms import  CustomUserCreationForm
+from django.contrib.auth.forms import UserCreationForm
+from .forms import CustomUserCreationForm
 # Create your views here.
 
 def loginUser(request):
@@ -23,11 +24,25 @@ def logoutUser(request):
     logout(request)
     return redirect('homepage')
 
-# def registerUser(request):
-#     page = 'register'
-#     form = CustomUserCreationForm()
-#     context = {'form': form, 'page': page}
-#     return render(request, 'properties/login_register.html', context)
+def registerUser(request):
+    page = 'register'
+    form = CustomUserCreationForm()
+
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.save()
+
+            user = authenticate (request, username=user.username, password=request.POST['password1'])
+
+            if user is not None:
+                login(request, user)
+                return redirect('homepage')
+
+
+    context = {'form': form, 'page': page}
+    return render(request, 'properties/login_register.html', context)
 
 def homepage(request):
     location = request.GET.get('location')
@@ -45,8 +60,14 @@ def homepage(request):
 
 def lessorpage(request):
     username=request.user.get_username()
-
-    properties = Property.objects.all()
+    user = request.user
+    location = request.GET.get('location')
+    if location == None:
+        properties = Property.objects.filter(location__user=user)
+    else:
+        properties = Property.objects.filter(location__user=user)
+    
+    properties = Property.objects.filter(user=user)
 
     context = {'properties': properties, 'username': username}
     return render(request, 'properties/lessorpage.html', context)
