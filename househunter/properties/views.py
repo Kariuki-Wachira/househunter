@@ -1,5 +1,6 @@
+from django.contrib.auth import forms
 from django.shortcuts import render, redirect
-from .models import Location, Property
+from .models import Location, Property, Wishlist
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
@@ -17,6 +18,10 @@ def loginUser(request):
         if user is not None:
             login(request, user)
             return redirect('homepage')
+        
+        # forms = {
+        #     errors
+        # }
 
     return render(request,'properties/login_register.html', {'page': page,})
 
@@ -40,7 +45,7 @@ def registerUser(request):
                 login(request, user)
                 return redirect('homepage')
 
-
+    print(form)
     context = {'form': form, 'page': page}
     return render(request, 'properties/login_register.html', context)
 
@@ -75,6 +80,23 @@ def lessorpage(request):
 def viewProperty(request, pk):
     property = Property.objects.get(id=pk)
     return render(request, 'properties/property.html', {'property': property})
+
+@login_required(login_url='login')
+def viewmywishlist(request):
+    user = request.user
+    wishes = Wishlist.objects.filter(user=user)
+
+    context = {'wishes': wishes}
+    return render(request, 'properties/wishlist.html', context)
+
+@login_required(login_url='login')
+def addToWishlist(request,pk):
+    user = request.user
+    property = Property.objects.get(id=pk)
+    Wishlist.objects.create(user=user,property=property)
+
+    return redirect('property',pk=pk)
+
 
 @login_required(login_url='login')
 def addProperty(request):

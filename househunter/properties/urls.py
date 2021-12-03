@@ -6,6 +6,8 @@ urlpatterns = [
     path('login/', views.loginUser, name='login'),
     path('logout/', views.logoutUser, name='logout'),
     path('register/', views.registerUser, name='register'),
+    path('wishlist/',views.viewmywishlist,name='wishlist'),
+    path("addWishlist/<str:pk>/",views.addToWishlist, name="addWish" ),
 
     path('lessorpage/', views.lessorpage, name='lessorpage'),
     path('', views.homepage, name='homepage'),

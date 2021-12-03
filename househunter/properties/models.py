@@ -19,8 +19,14 @@ class Property(models.Model):
     contacts = models.TextField(default= 'n/a')
     description = models.TextField()
 
+    # def __str__(self):
+    #     return self.location.name
+
+class Wishlist(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    property = models.ForeignKey(Property, on_delete=models.SET_NULL,null=True,blank=True)
 
     def __str__(self):
-        return self.description
+        return self.user.username
 
    

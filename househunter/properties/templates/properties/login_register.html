@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <title>Login/Register</title>
 
+    <!--These are the styles applied to the login and registration form-->
     <style>
         .loginwrap {
             display: flex;
@@ -24,7 +25,9 @@
 
 <body>
     <div class="container">
+        <!--This is the container for both the login and registration form-->
         <div class="loginwrap">
+            <!--Login form-->
             {% if page == 'login' %}
             <form method='POST' class="form">
                 {% csrf_token %}
@@ -41,6 +44,7 @@
                 <a href="{% url 'homepage' %}" class="btn btn-dark btn-block m-1">Continue without Logging in</a>
                 <p>Don't have an account? <a href="{% url 'register' %}"> Register</a></p>
             </form>
+            <!--Register form-->
             {% else %}
             <form method='POST'>
                 <h3 class="logintitle text-muted">Register</h3>
@@ -48,7 +52,12 @@
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">{{field.label}}</label> {{field}}
                 </div>
-                {% endfor %}
+                <!--Error message for registration form-->
+                {% endfor %} {% if form.errors %} {% for field in form %} {% for error in field.errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+                {% endfor %} {% endfor %} {% endif %}
                 <button type="submit" class="btn btn-dark btn-block m-1">Register</button>
                 <a href="{% url 'homepage' %}" class="btn btn-dark btn-block m-1">Continue without Logging in</a>
                 <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
