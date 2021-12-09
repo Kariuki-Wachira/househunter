@@ -9,7 +9,7 @@ urlpatterns = [
     path('wishlist/',views.viewmywishlist,name='wishlist'),
     path("addWishlist/<str:pk>/",views.addToWishlist, name="addWish" ),
 
-    path('lessorpage/', views.lessorpage, name='lessorpage'),
+    path('staffrequest/', views.staffrequest, name='staffrequest'),
     path('', views.homepage, name='homepage'),
     path('property/<str:pk>/', views.viewProperty, name='property'),
     path('add/', views.addProperty, name='add'),

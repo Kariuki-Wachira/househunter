@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from .forms import CustomUserCreationForm
+from django.contrib.admin.views.decorators import staff_member_required
 # Create your views here.
 
 def loginUser(request):
@@ -63,25 +64,18 @@ def homepage(request):
     context = {'locations': locations, 'properties': properties, 'username': username}
     return render(request, 'properties/homepage.html', context)
 
-def lessorpage(request):
+def staffrequest(request):
     username=request.user.get_username()
     user = request.user
-    location = request.GET.get('location')
-    if location == None:
-        properties = Property.objects.filter(location__user=user)
-    else:
-        properties = Property.objects.filter(location__user=user)
-    
-    properties = Property.objects.filter(user=user)
+    context = {'username': username}
+    return render(request, 'properties/staffreq.html', context)
 
-    context = {'properties': properties, 'username': username}
-    return render(request, 'properties/lessorpage.html', context)
 
 def viewProperty(request, pk):
     property = Property.objects.get(id=pk)
     return render(request, 'properties/property.html', {'property': property})
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 def viewmywishlist(request):
     user = request.user
     wishes = Wishlist.objects.filter(user=user)
@@ -99,6 +93,7 @@ def addToWishlist(request,pk):
 
 
 @login_required(login_url='login')
+@staff_member_required(login_url='staffrequest')
 def addProperty(request):
     locations = Location.objects.all()
 

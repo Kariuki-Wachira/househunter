@@ -28,6 +28,7 @@
 
     <!--This is the main Container for the body-->
     <div class="container">
+        <!--Here we have the top bar-->
         <ul class="nav mb-3 justify-content-end" role="tablist">
             {% if request.user.is_authenticated %}
             <li class="nav-item">
@@ -37,7 +38,7 @@
                 <a href="{% url 'logout' %}" class="btn btn-dark btn-block btn-sm m-1">LogOut</a>
             </li>
             <li>
-                <a href="{% url 'wishlist' %}" class="btn btn-dark btn-block btn-sm m-1">View Wishlist</a>
+                <a href="{% url 'wishlist' %}" class="btn btn-dark btn-block btn-sm m-1">View My Wishlist</a>
             </li>
             {% else %}
             <li class="nav-item">
@@ -47,7 +48,7 @@
         </ul>
 
 
-        <!--The Container is divided into two parts where one is the navigation and the other is for the property listings -->
+        <!--The Container is divided into two parts where one is the left navigation and the other is for the property listings -->
         <div class="row">
             <div class="col-md-3">
                 <!--This is the Left Navigation Bar where you can select and filter properties by Location-->

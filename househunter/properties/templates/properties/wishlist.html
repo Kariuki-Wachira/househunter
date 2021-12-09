@@ -7,29 +7,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 
-    <title>Document</title>
+    <title>Wishlist</title>
 </head>
 
-<body>
-    <div class="col-md-9">
-        <div class="row">
+<body class="m-5">
+    <div class="container">
+        <ul class="nav mb-3 justify-content-home" role="tablist">
+            <li class="nav-item">
+                <p style="font-size: 21px">Hello {{request.user}}, Here is your Wishlist </p>
+            </li>
+            <li>
+                <a href="{% url 'homepage' %}" class="btn btn-dark btn-block btn-sm m-1">Back</a>
+            </li>
+        </ul>
 
-            {% for wish in wishes %}
-            <div class="col-md-4">
-                <div class="card my-2">
-                    <img src="{{wish.property.image.url}}" class="image-thumbnail" alt="Card image cap">
 
-                    <div class="card-body">
-                        <small>Location : {{wish.property.location.name}}</small>
+        <div class="col-m-9">
+            <div class="row">
+
+                {% for wish in wishes %}
+                <div class="col-md-3">
+                    <div class="card my-4">
+                        <img src="{{wish.property.image.url}}" class="image-thumbnail" alt="Card image cap">
+
+                        <div class="card-body">
+                            <small>Location : {{wish.property.location.name}}</small>
+                        </div>
+                        <a href="{% url 'property' wish.property.id %}" class="btn btn-outline-dark btn-sm m-1">View Property</a>
                     </div>
-                    <a href="{% url 'property' wish.property.id %}" class="btn btn-outline-dark btn-sm m-1">View Property</a>
                 </div>
+                {% empty %}
+                <h3>YOU HAVE NO PROPERTIES IN YOUR WISHLIST...</h3>
+                {% endfor %}
+
+
             </div>
-            {% empty %}
-            <h3>YOU HAVE NO PROPERTIES IN YOUR WISHLIST...</h3>
-            {% endfor %}
-
-
         </div>
     </div>
 </body>
