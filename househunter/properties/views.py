@@ -1,6 +1,6 @@
 from django.contrib.auth import forms
 from django.shortcuts import render, redirect
-from .models import Location, Property, Wishlist
+from .models import Location, Property, Staffrequest, Wishlist
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
@@ -20,9 +20,6 @@ def loginUser(request):
             login(request, user)
             return redirect('homepage')
         
-        # forms = {
-        #     errors
-        # }
 
     return render(request,'properties/login_register.html', {'page': page,})
 
@@ -70,12 +67,16 @@ def staffrequest(request):
     context = {'username': username}
     return render(request, 'properties/staffreq.html', context)
 
+def sentrequest(request):
+    user = request.user
+    Staffrequest.objects.create(user=user)
+    return redirect('homepage')
 
 def viewProperty(request, pk):
     property = Property.objects.get(id=pk)
     return render(request, 'properties/property.html', {'property': property})
 
-# @login_required(login_url='login')
+@login_required(login_url='login')
 def viewmywishlist(request):
     user = request.user
     wishes = Wishlist.objects.filter(user=user)
@@ -112,7 +113,8 @@ def addProperty(request):
             image = image,
             location =location,
             description=data['description'],
-            availabilitystatus=data['availabilitystatus'],
+            email=data['email'],
+            noofrooms=data['rooms'],
             price=data['price'],
             contacts=data['contacts'],
         )

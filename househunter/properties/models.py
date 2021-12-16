@@ -14,13 +14,18 @@ class Property(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     location = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True, blank=True)
     image = models.ImageField(null=False, blank=False)
-    availabilitystatus = models.TextField(default= 'n/a')
     price = models.TextField(default= 'n/a')
     contacts = models.TextField(default= 'n/a')
+    email = models.TextField(default= 'n/a')
+    noofrooms = models.TextField(default='unspecified')
     description = models.TextField()
 
     # def __str__(self):
     #     return self.location.name
+
+class Staffrequest(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    message = models.TextField(default='Request for lessor rights')
 
 class Wishlist(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)

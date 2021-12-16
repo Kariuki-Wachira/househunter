@@ -10,6 +10,7 @@ urlpatterns = [
     path("addWishlist/<str:pk>/",views.addToWishlist, name="addWish" ),
 
     path('staffrequest/', views.staffrequest, name='staffrequest'),
+    path('makerequest/', views.sentrequest, name='makerequest'),
     path('', views.homepage, name='homepage'),
     path('property/<str:pk>/', views.viewProperty, name='property'),
     path('add/', views.addProperty, name='add'),

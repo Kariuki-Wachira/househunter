@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Lessor page</title>
+    <title>Lessor rights required</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- <link href="css/style.css" rel="stylesheet"> -->
@@ -10,26 +10,32 @@
     <!-- This is the CSS link from bootstrap. I used bootstrap because I am very poor with designs and applying external CSS was slowing my progress -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 
-    <style>
-        .image-thumbnail {
-            height: 200px;
-            object-fit: cover;
-        }
-        
-        .list-group-item a {
-            text-decoration: none;
-            color: black;
-        }
-    </style>
+
 
 </head>
 
 <body class="m-5">
 
     <!--This is the main Container for the body-->
-    <div class="container">
-        <strong>Hello {{request.user}}, We regretably inform you that you are not allowed to post on this platform at the moment<br><br>Please contact the admin for support </strong>
+    <div class="card text-center">
+        <div class="card-body">
+            <i class="bi bi-lock-fill"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
+                <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+              </svg>
+            <h5 class="card-title" style="color: rgb(245, 2, 2);">Attention required!!</h5>
+            <p class="card-text">Hello {{request.user}}, We regretably inform you that you are not allowed to post on this platform at the moment<br><br>Please make a request below to the admin for verification </p>
+            <a href="{% url 'makerequest' %}" class="btn btn-primary" onclick="myFunction()">Request permission</a><br><br>
 
+            <!-- <button onclick="myFunction()">Try it</button> -->
+
+            <script>
+                function myFunction() {
+                    alert("Request received, check back after 24hours. Thank you for your patience");
+                }
+            </script>
+            <a href="{% url 'homepage' %}" class="btn btn-outline-dark btn-sm m-1">Back to Properties</a>
+        </div>
     </div>
 </body>
 
