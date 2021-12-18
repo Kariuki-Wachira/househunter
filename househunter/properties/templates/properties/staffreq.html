@@ -26,9 +26,6 @@
             <h5 class="card-title" style="color: rgb(245, 2, 2);">Attention required!!</h5>
             <p class="card-text">Hello {{request.user}}, We regretably inform you that you are not allowed to post on this platform at the moment<br><br>Please make a request below to the admin for verification </p>
             <a href="{% url 'makerequest' %}" class="btn btn-primary" onclick="myFunction()">Request permission</a><br><br>
-
-            <!-- <button onclick="myFunction()">Try it</button> -->
-
             <script>
                 function myFunction() {
                     alert("Request received, check back after 24hours. Thank you for your patience");
