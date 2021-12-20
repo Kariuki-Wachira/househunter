@@ -36,11 +36,15 @@
                     <p class="card-text">{{property.description}}</p>
 
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <a href="{% url 'addWish' property.id %}" class="btn btn-primary" type="button">Add to wish-list</a>
+                        <a href="{% url 'addWish' property.id %}" class="btn btn-primary" onclick="myFunction()" type="button">Add to wish-list</a>
                         <a class="btn btn-dark" type="button" onclick="printFunction()">Save Information as PDF</a>​
                         <script>
                             function printFunction() {
                                 window.print();
+                            }
+
+                            function myFunction() {
+                                alert("Property added to your wish list, go back to all properties to view your wishlist");
                             }
                         </script>
                     </div>

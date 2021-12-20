@@ -84,8 +84,9 @@
                     <!--Here we have the right panel where properties posted are listed in card mode-->
                     <div class="col-md-4">
                         <div class="card my-2">
-                            <img src="{{property.image.url}}" class="image-thumbnail" alt="Card image cap">
-
+                            <a href="{% url 'property' property.id %}">
+                                <img src="{{property.image.url}}" class="image-thumbnail" alt="Card image cap" width="260" height="70">
+                            </a>
                             <div class="card-body">
                                 <i class="bi bi-geo-alt"></i>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
@@ -95,7 +96,7 @@
                                 <small style="color: rgb(8, 9, 119);">{{property.location.name}}</small>
 
                             </div>
-                            <a href="{% url 'property' property.id %}" class="btn btn-outline-dark btn-sm m-1">View Property</a>
+                            <!-- <a href="{% url 'property' property.id %}" class="btn btn-outline-dark btn-sm m-1">View Property</a> -->
                         </div>
                     </div>
                     {% empty %}
